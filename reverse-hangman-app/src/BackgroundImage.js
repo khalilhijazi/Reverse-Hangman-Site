@@ -4,6 +4,7 @@ import Base from './backgroundImage.jpg';
 import {Link} from 'react-router-dom';
 import Home from './HomePage';
 import {Route} from 'react-router-dom/Route';
+import './fonts/ChalkDash.ttf';
 
 class BackgroundImage extends Component {
 
