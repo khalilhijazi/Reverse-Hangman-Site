@@ -92,5 +92,5 @@
 
 @font-face {
     font-family: 'ChalkDash';
-    src: url('./fonts/ChalkDash.ttf');
+    src: local('ChalkDash'), url('./fonts/ChalkDash.ttf');
 }
