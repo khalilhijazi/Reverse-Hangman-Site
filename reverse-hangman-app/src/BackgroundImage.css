@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'ChalkDash';
-    src: local('ChalkDash'), url('../src/fonts/ChalkDash.ttf');
+    src: local('ChalkDash'), url(./fonts/ChalkDash.ttf) format('truetype');
 }
 
 #imgContainer {
