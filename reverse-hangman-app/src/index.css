@@ -7,3 +7,8 @@ body {
 #root {
   height: 100vh;
 }
+
+@font-face {
+  font-family: 'ChalkDash';
+  src: local('ChalkDash'), url('./fonts/ChalkDash.ttf');
+}
