@@ -12,7 +12,9 @@ class BackgroundImage extends Component {
             
                 <div id="imgContainer">
                     <img src={Base} id="bgImage" />
-                    <Link to='/home'><button className="btn btn-default btn-danger btn-md">Get Started</button></Link>
+                    <h1 id="title">Reverse Hangman</h1>
+                    <Link to='/home'><button className="btn btn-default btn-primary">Get Started</button></Link>
+                    <h2 id="description">A Logical Game That's Also Fun</h2>
                 </div>
            
         );
