@@ -1,96 +1,78 @@
-@font-face {
-    font-family: 'ChalkDash';
-    src: local('ChalkDash'), url('./fonts/ChalkDash.ttf') format('truetype');
-}
-
 #imgContainer {
     width: 100%;
     height: 100%;
     position: relative;
-}
-#bgImage {
-    width: 100%;
-    height: auto;
+    background-image: url('./backgroundImage.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    left:0; right:0;
+    top:0; bottom:0;
+	margin:auto;
+	
+	max-width:100%;
+	max-height:100%;
+	overflow:auto;
 }
 
-#imgContainer img {
-    height: 100%;
-    width: 100%;
-}
 
 #imgContainer .btn {
     position: absolute;
-    top: 52%;
-    left: 48%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    border-radius: 25px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-right: 50px;
-    padding-left: 50px;
-    font-family: 'ChalkDash';
-    font-size: 30px;
+    border-radius: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
+    
+    
 }
 
 #imgContainer #title {
     position: absolute;
-    top: 20%;
-    left: 70%;
+    top: 30%;
+    left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    font-size: 320%;
+    font-size: 400%;
     color: white;
-    width: 50%;
-    font-family: 'ChalkDash';
+    width: 100%;
+    
 }
 
 #imgContainer #description {
     position: absolute;
-    top: 80%;
-    left: 45%;
+    top: 40%;
+    left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    font-size: 300%;
+    font-size: 225%;
     color: white;
-    width: 65%;
-    font-family: 'ChalkDash';
+    width: 100%;
+    
 }
 
-@media screen and (min-width: 451px) and (max-width: 768px) {
-    #imgContainer .btn {
-        font-size: 20px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-right: 30px;
-        padding-left: 30px;
-    }
-
+@media screen and (min-width: 360px) and (max-width: 550px) {
     #imgContainer #title {
         font-size: 250%;
+       
     }
+
     #imgContainer #description {
-        font-size: 250%;
-    }
-}
-
-@media screen and (max-width: 450px) {
-    #imgContainer .btn {
-        padding-top: 5px;
-        padding-bottom: 5px;
-        padding-right: 16px;
-        padding-left: 16px;
-        font-size: 12px;
-    }
-
-    #imgContainer #title {
         font-size: 170%;
-        top: 18%;
-        left: 68%;
+    }
+}
+
+@media screen and (max-width: 359px) {
+    #imgContainer #title {
+        font-size: 200%;
     }
 
     #imgContainer #description {
-        font-size: 140%;
-        width: 75%;
+        font-size: 150%;
     }
 }

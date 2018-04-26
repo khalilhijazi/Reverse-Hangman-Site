@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route exact path='/' component={BackgroundImage} />
+          <Route exact path='/' component={Home} />
           <Route path='/home' component={Home} />
         </div>
       </Router>

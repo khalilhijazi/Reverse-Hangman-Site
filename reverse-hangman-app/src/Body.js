@@ -3,18 +3,17 @@ import logo from './logo.svg';
 import Header from './Header';
 import Footer from './Footer';
 import './Home.css';
-import Body from './Body';
+import BackgroundImage from './BackgroundImage';
+import './Body.css';
 
-class Home extends Component {
+class Body extends Component {
     render() {
         return(
-            <div className="Home">
-                <Header />
-                <Body />
-                <Footer />
+            <div className="bodyContainer">
+                <BackgroundImage />
             </div>
         );
     }
 }
 
-export default Home;
+export default Body;

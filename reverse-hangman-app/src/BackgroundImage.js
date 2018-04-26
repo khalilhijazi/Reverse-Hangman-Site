@@ -10,13 +10,13 @@ class BackgroundImage extends Component {
 
     render() {
         return(
-                <div id="imgContainer">
-                    <img src={Base} id="bgImage" />
+            <div id="imgContainer">
+                <div id="bgContents">
                     <h1 id="title">Reverse Hangman</h1>
+                    <h2 id="description">Let Your Mind Wander Away</h2>
                     <Link to='/home'><button className="btn btn-default btn-primary">Get Started</button></Link>
-                    <h2 id="description">A Logical Game That's Also Fun</h2>
                 </div>
-           
+            </div>
         );
     }
 }
