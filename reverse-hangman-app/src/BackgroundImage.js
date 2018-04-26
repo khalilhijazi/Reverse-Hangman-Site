@@ -6,7 +6,7 @@ import {Route} from 'react-router-dom/Route';
 
 
 class BackgroundImage extends Component {
-
+    //hello
     render() {
         return(
             <div id="imgContainer">
