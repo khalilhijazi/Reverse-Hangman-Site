@@ -1,6 +1,6 @@
 #imgContainer {
     width: 100%;
-    height: 100%;
+    height: 900px;
     position: relative;
     background-image: url('./backgroundImage.jpg');
     -webkit-background-size: cover;

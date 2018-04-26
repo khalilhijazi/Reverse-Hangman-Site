@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BackgroundImage from './BackgroundImage';
+import GamePlay from './GamePlay';
 import './Body.css';
 
 class Body extends Component {
@@ -7,6 +8,7 @@ class Body extends Component {
         return(
             <div className="bodyContainer">
                 <BackgroundImage />
+                <GamePlay />
             </div>
         );
     }
