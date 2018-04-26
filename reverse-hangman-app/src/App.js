@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import Header from './Header';
-import Footer from './Footer';
-import Body from './Body';
 import './App.css';
-import BackgroundImage from './BackgroundImage';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import Home from './HomePage';
