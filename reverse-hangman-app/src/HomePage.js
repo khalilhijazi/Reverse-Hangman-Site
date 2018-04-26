@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import Header from './Header';
 import Footer from './Footer';
 import './Home.css';
-import Body from './Body';
+import Body from './Body.js';
 
 class Home extends Component {
     render() {
