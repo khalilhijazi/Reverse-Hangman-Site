@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './Header.css';
+import { HashLink as Link } from 'react-router-hash-link';
 
 class Header extends Component {
     render() {
@@ -12,7 +13,7 @@ class Header extends Component {
                 <div className="collapse navbar-collapse" id="navbarmenu">
                     <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <a className="nav-link" href="#gameRules">Game Rules</a>
+                                <Link to="#gameRules" className="nav-link"><span>Game Rules</span></Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Screenshots</a>
