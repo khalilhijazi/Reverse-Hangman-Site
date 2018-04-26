@@ -16,7 +16,15 @@
 
 .gameplayContainer #rulesDescription1 {
     color: white;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: justify;
     
+}
+@media screen and (max-width: 500px) {
+    .gameplayContainer #rulesTitle {
+        font-size: 250%;
+    }
 }
 
 
