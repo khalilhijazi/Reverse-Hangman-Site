@@ -52,29 +52,6 @@
     
 }
 
-@media screen and (min-width:750px) and (max-width: 1024px) {
-    #imgContainer {
-        height: 500px;
-    }
-    #imgContainer #description {
-        top: 45%;
-    }
-    #imgContainer .btn {
-        top: 60%;
-    }
-}
-
-@media screen and (max-width: 749px) {
-    #imgContainer {
-        height: 400px;
-    }
-    #imgContainer #description {
-        top: 48%;
-    }
-    #imgContainer .btn {
-        top: 65%;
-    }
-}
 
 @media screen and (min-width: 360px) and (max-width: 550px) {
     #imgContainer #title {
@@ -93,6 +70,6 @@
     }
 
     #imgContainer #description {
-        font-size: 180%;
+        font-size: 170%;
     }
 }
