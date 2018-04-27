@@ -1,0 +1,36 @@
+.Feedback {
+    height: auto;
+    background-color: #A88768;
+    position: relative;
+    display: table;
+    padding-right: 20%;
+    padding-left: 20%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    width: 100%;
+}
+
+.Feedback form {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#formSecondRow {
+    display: table;
+    width: 100%;
+}
+
+#formSecondRow div {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.labels {
+    color: #40535A;
+    font-size: 110%;
+}
+#formHeader {
+    color: #40535A;
+}

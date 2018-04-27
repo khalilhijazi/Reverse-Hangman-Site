@@ -19,7 +19,7 @@ class Header extends Component {
                                 <a className="nav-link" href="#">Screenshots</a>
                             </li>
                             <li className="nav-item">
-                                <a href="#" className="nav-link">Got Feedback?</a>
+                                <Link to="#feedback" className="nav-link"><span>Got Feedback?</span></Link>
                             </li>
                             <li className="nav-item">
                                 <a href="#" className="nav-link">About Us</a>
