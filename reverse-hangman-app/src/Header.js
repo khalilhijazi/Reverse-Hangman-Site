@@ -5,7 +5,7 @@ import { HashLink as Link } from 'react-router-hash-link';
 class Header extends Component {
     render() {
         return(
-            <nav className="navbar navbar-default fixed-top bg-dark navbar-dark navbar-expand-md">
+            <nav className="navbar navbar-default bg-dark navbar-dark navbar-expand-md">
                 <a className="navbar-brand" href="#">Reverse Hangman</a>
                 <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarmenu">
                     <span className="navbar-toggler-icon"></span>

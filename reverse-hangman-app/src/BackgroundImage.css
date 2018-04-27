@@ -9,67 +9,59 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    display: table;
   
 }
 
 
-#imgContainer .btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    border-radius: 40px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 30px;
-    padding-left: 30px;
-    
-    
-}
-
 #imgContainer #title {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    font-size: 400%;
     color: white;
-    width: 100%;
+    font-size: 350%;
+    margin-bottom: 2%;
+    margin-top: -15%;
+    
     
 }
 
 #imgContainer #description {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    font-size: 225%;
     color: white;
-    width: 100%;
-    
+    font-size: 250%;
+    margin-bottom: 2%;
 }
 
+#imgContainer .btn {
+    font-size: 150%;
+}
 
-@media screen and (min-width: 360px) and (max-width: 550px) {
+#imgContainer div {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+@media screen and (min-width:400px) and (max-width:500px) {
     #imgContainer #title {
-        font-size: 250%;
-       
+        font-size: 275%;
     }
-
     #imgContainer #description {
-        font-size: 210%;
+        font-size: 180%;
+    }
+    #imgContainer .btn {
+        font-size: 100%;
     }
 }
 
-@media screen and (max-width: 359px) {
+@media screen and (max-width:399px) {
     #imgContainer #title {
-        font-size: 200%;
+        font-size: 230%;
+        margin-top: -70%;
+        margin-bottom: 5%;
     }
-
     #imgContainer #description {
-        font-size: 170%;
+        font-size: 150%;
+        margin-bottom: 7%;
+    }
+    #imgContainer .btn {
+        font-size: 75%;
     }
 }
