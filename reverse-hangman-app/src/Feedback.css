@@ -34,3 +34,24 @@
 #formHeader {
     color: #40535A;
 }
+
+#submitBtn {
+    margin-top: 6%;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    background-color: #40535A;
+    border: 2px solid #ffffff;
+    color: white;
+}
+
+
+@media screen and (max-width:500px) {
+    #submitBtn {
+        padding-right: 50px;
+        padding-left: 50px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+}

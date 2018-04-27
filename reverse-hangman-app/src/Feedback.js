@@ -28,6 +28,7 @@ class Feedback extends Component {
                             <textarea className="form-control" rows="12" id="comment"></textarea>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-lg" id="submitBtn">Submit</button>
                 </form>
             </div>
         );
