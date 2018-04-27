@@ -1,0 +1,28 @@
+.About {
+    background-color: #626B76;
+    position: relative;
+}
+
+#aboutMe {
+    color: white;
+    text-align: center;
+    display: table;
+    width: 100%;
+    padding: 3%;
+}
+
+.centeredText {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding-right: 15%;
+    padding-left: 15%;
+    font-size: 150%;
+}
+
+@media screen and (max-width:400px) {
+    .centeredText {
+        font-size: 120%;
+    }
+}
+

@@ -31,6 +31,9 @@
 
 #imgContainer .btn {
     font-size: 150%;
+    background-color: #40535A;
+    color: white;
+    border: 3px solid white;
 }
 
 #imgContainer div {

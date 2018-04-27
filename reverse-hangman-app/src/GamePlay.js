@@ -6,7 +6,7 @@ class GamePlay extends Component {
     render() {
         return(
             <div className="gameplayContainer" id="gameRules">
-                <h1 id="rulesTitle">Playing The Game</h1>
+                <h2 id="rulesTitle">Playing The Game</h2>
                 <p id="rulesDescription1">
                     Reverse Hangman is a game of words, very similar to Hangman itself, only 100x better. The way it works is that
                     one person chooses a five letter word every round while others attempt to figure out that word. Each guess the

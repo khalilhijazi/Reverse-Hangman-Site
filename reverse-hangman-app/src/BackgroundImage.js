@@ -10,7 +10,7 @@ class BackgroundImage extends Component {
                 <div>
                     <h1 id="title">Reverse Hangman</h1>
                     <h3 id="description">Let Your Mind Wander</h3>
-                    <Link to='/home'><button className="btn btn-default btn-primary">Get Started</button></Link>
+                    <Link to='/home'><button className="btn btn-default">Get Started</button></Link>
                 </div>
             </div>
         );

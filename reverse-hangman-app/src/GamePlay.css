@@ -12,7 +12,9 @@
 
 .gameplayContainer #rulesTitle {
     color: white;
-    font-size: 300%;
+}
+.gameplayContainer {
+    font-size: 150%;
 }
 
 .gameplayContainer #rulesDescription1 {
@@ -22,9 +24,9 @@
     text-align: justify;
     
 }
-@media screen and (max-width: 500px) {
-    .gameplayContainer #rulesTitle {
-        font-size: 250%;
+@media screen and (max-width: 400px) {
+    .gameplayContainer {
+        font-size: 120%;
     }
 }
 
