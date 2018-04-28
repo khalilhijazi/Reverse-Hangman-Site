@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import './About.css';
+import Facebook from './facebook.png';
+import Linkedin from './linkedin.png';
+import Gmail from './gmail.png';
+import Instagram from './instagram.png';
+import Twitter from './twitter.png';
+import Snapchat from './snapchat.png';
+import Phone from './phone.png';
 
-import { SocialIcon } from 'react-social-icons';
+
 
 class About extends Component {
     render() {
-        
-        var width = document.documentElement.clientWidth;
-        var height = document.documentElement.clientHeight;
-        console.log(width);
-        console.log(height);
         var urls = [
             'https://www.linkedin.com/in/khalilbhijazi/',
             'https://www.facebook.com/khalil.hijazi.5268',
@@ -34,14 +37,14 @@ class About extends Component {
                     
                     <h4>Join my Social Network Now</h4>
                     <div id="iconsContainer">
-                        <SocialIcon url={urls[0]} style={{ padding: ((width + height) / 110)}} />
-                        <SocialIcon url={urls[1]} style={{ padding: ((width + height) / 110)}} />
-                        <SocialIcon url={urls[2]} style={{ padding: ((width + height) / 110)}} />
-                        <SocialIcon url={urls[3]} style={{ padding: ((width + height) / 110)}} />
-                        <SocialIcon url={urls[4]} style={{ padding: ((width + height) / 110)}} />
-                        <SocialIcon url={urls[5]} style={{ padding: ((width + height) / 110)}} />
-                        <SocialIcon url={urls[6]} style={{ padding: ((width + height) / 110)}} />
-                        
+                        <Link to={urls[0]}><img src={Linkedin} className="socialIcons" alt={urls[0]}/></Link>
+                        <Link to={urls[1]}><img src={Facebook} className="socialIcons" alt={urls[1]}/></Link>
+                        <Link to={urls[2]}><img src={Gmail} className="socialIcons" alt={urls[2]}/></Link>
+                        <Link to={urls[3]}><img src={Instagram} className="socialIcons" alt={urls[3]}/></Link>
+                        <Link to={urls[4]}><img src={Twitter} className="socialIcons" alt={urls[4]}/></Link>
+                        <Link to={urls[5]}><img src={Snapchat} className="socialIcons" alt={urls[5]}/></Link>
+                        <Link to={urls[6]}><img src={Phone} className="socialIcons" alt={urls[6]}/></Link>
+
                     </div>
                 </div>
             </div>

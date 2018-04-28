@@ -32,4 +32,8 @@
     font-size: calc((2.5vw + 2.5vh) / 2);
 }
 
+.socialIcons {
+    width: 5.5vmin;
+    height: 4vmax;
+}
 
