@@ -20,7 +20,7 @@ class About extends Component {
             'https://www.instagram.com/khalil_hijazi99/',
             'https://twitter.com/MixMasterAhmu',
             'https://www.snapchat.com/add/sonofgoku22',
-            'tel:1-408-555-5555'
+            'tel:1-301-503-9511'
         ];
 
         return(
