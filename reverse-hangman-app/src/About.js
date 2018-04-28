@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import './About.css';
 
-import { SocialIcons } from 'react-social-icons';
+import { SocialIcon } from 'react-social-icons';
 
 class About extends Component {
     render() {
         
+        var width = document.documentElement.clientWidth;
+        var height = document.documentElement.clientHeight;
+        console.log(width);
+        console.log(height);
         var urls = [
             'https://www.linkedin.com/in/khalilbhijazi/',
             'https://www.facebook.com/khalil.hijazi.5268',
@@ -29,7 +33,16 @@ class About extends Component {
                     </p>
                     
                     <h4>Join my Social Network Now</h4>
-                    <SocialIcons urls={urls} />
+                    <div id="iconsContainer">
+                        <SocialIcon url={urls[0]} style={{ padding: ((width + height) / 110)}} />
+                        <SocialIcon url={urls[1]} style={{ padding: ((width + height) / 110)}} />
+                        <SocialIcon url={urls[2]} style={{ padding: ((width + height) / 110)}} />
+                        <SocialIcon url={urls[3]} style={{ padding: ((width + height) / 110)}} />
+                        <SocialIcon url={urls[4]} style={{ padding: ((width + height) / 110)}} />
+                        <SocialIcon url={urls[5]} style={{ padding: ((width + height) / 110)}} />
+                        <SocialIcon url={urls[6]} style={{ padding: ((width + height) / 110)}} />
+                        
+                    </div>
                 </div>
             </div>
         );

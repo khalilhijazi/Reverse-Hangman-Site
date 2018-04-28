@@ -8,18 +8,17 @@ class Feedback extends Component {
                 <form>
                     <h3 id="formHeader">We Value Your Feedback</h3>
                     <div className="form-row">
-                        <div className="form-group col-sm-4">
+                        <div className="form-group col-lg-4">
                             <label htmlFor="firstName" className="labels">First name</label>
-                            <input type="text" className="form-control" placeholder="First name" />
+                            <input type="text" className="form-control inputs" placeholder="First name" />
                         </div>
-                        <div className="form-group col-sm-4">
+                        <div className="form-group col-lg-4">
                             <label htmlFor="lastName" className="labels">Last name</label>
-                            <input type="text" className="form-control" placeholder="Last name" />
+                            <input type="text" className="form-control inputs" placeholder="Last name" />
                         </div>
-                        <div className="form-group col-sm-4">
+                        <div className="form-group col-lg-4">
                             <label htmlFor="exampleInputEmail1" className="labels">Email address</label>
-                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <input type="email" className="form-control inputs" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                         </div>
                     </div>
                     <div className="form-row" id="formSecondRow">

@@ -19,13 +19,17 @@
     font-size: 150%;
 }
 
-.centeredText p {
-    text-align: left;
+.centeredText h2 {
+    font-size: calc((3vw + 3vh) / 2);
 }
 
-@media screen and (max-width:400px) {
-    .centeredText {
-        font-size: 120%;
-    }
+.centeredText p {
+    text-align: left;
+    font-size: calc((2vw + 2vh) / 2);
 }
+
+.centeredText h4 {
+    font-size: calc((2.5vw + 2.5vh) / 2);
+}
+
 
