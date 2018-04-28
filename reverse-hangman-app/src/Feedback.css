@@ -65,14 +65,14 @@
 /* Overriding styles */
 
 ::-webkit-input-placeholder {
-    font-size: calc((1.8vw + 1.8vh) / 2)!important;
+    font-size: calc((1.5vw + 1.5vh) / 2)!important;
  }
  
  :-moz-placeholder { /* Firefox 18- */
-       font-size: calc((1.8vw + 1.8vh) / 2)!important;
+       font-size: calc((1.5vw + 1.5vh) / 2)!important;
  }
  ::-moz-placeholder {  /* Firefox 19+ */
-       font-size: calc((1.8vw + 1.8vh) / 2)!important;
+       font-size: calc((1.5vw + 1.5vh) / 2)!important;
  }
 
 
