@@ -68,3 +68,16 @@
         font-size: 75%;
     }
 }
+
+@media screen and (min-width:2000px) {
+    #imgContainer #title {
+        margin-top: -5%;
+    }
+   
+}
+
+@media screen and (min-width:3500px) {
+    #imgContainer #title {
+        margin-top: 0%;
+    }
+}

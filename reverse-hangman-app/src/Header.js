@@ -20,13 +20,13 @@ class Header extends Component {
                                 <a className="nav-link" href="#">Screenshots</a>
                             </li>
                             <li className="nav-item">
+                                <HashLink to="#" className="nav-link"><span>Updates</span></HashLink>
+                            </li>
+                            <li className="nav-item">
                                 <HashLink to="#feedback" className="nav-link"><span>Got Feedback?</span></HashLink>
                             </li>
                             <li className="nav-item">
                                 <HashLink to="#aboutMe" className="nav-link"><span>About Me</span></HashLink>
-                            </li>
-                            <li className="nav-item">
-                                <a href="#" className="nav-link">Contact Me</a>
                             </li>
                         </ul>
                 </div>

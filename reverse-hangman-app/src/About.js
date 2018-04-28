@@ -12,7 +12,8 @@ class About extends Component {
             'mailto:khalilbhijazi@gmail.com',
             'https://www.instagram.com/khalil_hijazi99/',
             'https://twitter.com/MixMasterAhmu',
-            'https://www.snapchat.com/add/sonofgoku22'
+            'https://www.snapchat.com/add/sonofgoku22',
+            'tel:1-408-555-5555'
         ];
 
         return(

@@ -13,11 +13,14 @@
 
 .centeredText {
     display: table-cell;
-    text-align: center;
     vertical-align: middle;
     padding-right: 15%;
     padding-left: 15%;
     font-size: 150%;
+}
+
+.centeredText p {
+    text-align: left;
 }
 
 @media screen and (max-width:400px) {
