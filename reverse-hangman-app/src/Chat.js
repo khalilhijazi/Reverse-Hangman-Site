@@ -11,7 +11,7 @@ class Chat extends React.Component{
             messages: []
         };
 
-        this.socket = io('localhost:8080');
+        this.socket = io('https://limitless-depths-91672.herokuapp.com:8080');
 
         this.socket.on('RECEIVE_MESSAGE', function(data){
             addMessage(data);
