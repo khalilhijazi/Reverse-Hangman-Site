@@ -1,0 +1,18 @@
+.Game {
+    height: 100%;
+}
+
+#gameBackground {
+    background: linear-gradient(to top right, #626B76 30%, #A88768 70%);
+    width: 100%;
+    height: calc(100vh - 56px);
+    display: table;
+    padding: 8%;
+}
+
+#gameContainer {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    background: #FAF7F2;
+}
