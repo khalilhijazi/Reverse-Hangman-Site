@@ -11,7 +11,7 @@ class Chat extends React.Component{
             messages: []
         };
 
-        this.socket = io('https://limitless-depths-91672.herokuapp.com');
+        this.socket = io.connect('https://limitless-depths-91672.herokuapp.com/game');
 
         this.socket.on('RECEIVE_MESSAGE', function(data){
             addMessage(data);
@@ -37,7 +37,7 @@ class Chat extends React.Component{
         return (
             <div className="container" style={{width: '100%', height: '100%'}}>
                 
-                <div className="card" style={{width: '100%', height: '100%'}}>
+                <div className="card" >
                     <div className="card-body">
                         <div className="card-title">Global Chat</div>
                         <hr/>
