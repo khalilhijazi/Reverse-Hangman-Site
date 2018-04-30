@@ -3,7 +3,9 @@ const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
+
 const PORT = process.env.PORT || 5000;
+const socket = require('socket.io');
 
 // Multi-process to utilize all CPU cores.
 if (cluster.isMaster) {
@@ -35,7 +37,17 @@ if (cluster.isMaster) {
     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
   });
 
-  app.listen(PORT, function () {
+  server = app.listen(PORT, function () {
     console.error(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
+  });
+
+  io = socket(server);
+
+  io.on('connection', (socket) => {
+      console.log(socket.id);
+
+      socket.on('SEND_MESSAGE', function(data){
+          io.emit('RECEIVE_MESSAGE', data);
+      })
   });
 }
