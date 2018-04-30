@@ -5,9 +5,7 @@ var app = express();
 const PORT = process.env.PORT || 8080;
 
 
-const server = app.listen(PORT, "0.0.0.0", function(){
-    console.log('server is running on port: ' + PORT);
-});
+var server = require('http').createServer(app).listen(PORT);
 
 io = socket(server);
 
