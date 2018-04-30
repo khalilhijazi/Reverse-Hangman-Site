@@ -1,12 +1,14 @@
+var express = require('express');
+var socket = require('socket.io');
 
-const socketIO = require('socket.io');
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 8080;
+var app = express();
 
-const server = app.listen(port);
-const io = socketIO(server);
-//io = socket(server);
+const port = process.env.PORT || 8080; 
+server = app.listen(port, function(){
+    console.log('server is running on port 8080')
+});
+
+io = socket(server);
 
 io.on('connection', (socket) => {
     console.log(socket.id);
