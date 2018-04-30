@@ -12,7 +12,7 @@ class Chat extends React.Component{
         };
 
         
-        this.socket = io.connect('https://limitless-depths-91672.herokuapp.com/', {secure: true});
+        this.socket = io.connect('https://limitless-depths-91672.herokuapp.com:8080');
 
         this.socket.on('RECEIVE_MESSAGE', function(data){
             addMessage(data);
