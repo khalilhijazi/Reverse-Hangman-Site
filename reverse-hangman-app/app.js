@@ -1,18 +1,16 @@
-const express = require('express');
-const app = express();
-const socket = require('socket.io');
-const Server = require('http').Server(app);
+var express = require('express');
+var socket = require('socket.io');
 
+var app = express();
 const PORT = process.env.PORT || 8080;
 
 
-const server = Server.listen(PORT, "0.0.0.0", function(){
+const server = app.listen(PORT, "0.0.0.0", function(){
     console.log('server is running on port: ' + PORT);
 });
 
 io = socket(server);
 
-app.use( express.static(__dirname + "./build") );
 io.on('connection', (socket) => {
     console.log(socket.id);
 
