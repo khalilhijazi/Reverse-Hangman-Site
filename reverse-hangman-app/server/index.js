@@ -45,8 +45,9 @@ if (cluster.isMaster) {
 
   io.on('connection', (socket) => {
       console.log(socket.id);
-
+    
       socket.on('SEND_MESSAGE', function(data){
+          //using io.emit instead of io.socket.emit
           io.emit('RECEIVE_MESSAGE', data);
       })
   });

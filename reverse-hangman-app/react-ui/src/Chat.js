@@ -12,7 +12,6 @@ class Chat extends React.Component{
         };
 
         
-        const port = process.env.PORT || 5000;
         this.socket = io.connect('https://limitless-depths-91672.herokuapp.com', {transports: ['websocket']});
 
         this.socket.on('RECEIVE_MESSAGE', function(data){
@@ -30,7 +29,8 @@ class Chat extends React.Component{
             this.socket.emit('SEND_MESSAGE', {
                 author: this.state.username,
                 message: this.state.message
-            })
+            });
+
             this.setState({message: ''});
 
         }
