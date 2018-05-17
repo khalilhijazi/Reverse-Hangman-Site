@@ -1,54 +1,33 @@
 const express = require('express');
 const path = require('path');
-const cluster = require('cluster');
-const numCPUs = require('os').cpus().length;
-
-
 const PORT = process.env.PORT || 5000;
 const socket = require('socket.io');
+const app = express();
 
-// Multi-process to utilize all CPU cores.
-if (cluster.isMaster) {
-  console.error(`Node cluster master ${process.pid} is running`);
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
-  // Fork workers.
-  for (let i = 0; i < numCPUs; i++) {
-    cluster.fork();
-  }
+// Answer API requests.
+app.get('/api', function (req, res) {
+res.set('Content-Type', 'application/json');
+res.send('{"message":"Hello from the custom server!"}');
+});
 
-  cluster.on('exit', (worker, code, signal) => {
-    console.error(`Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`);
-  });
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', function(request, response) {
+response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+});
 
-} else {
-  const app = express();
+const server = app.listen(PORT, function () {
+console.error(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
+});
 
-  // Priority serve any static files.
-  app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+const io = socket(server);
 
-  // Answer API requests.
-  app.get('/api', function (req, res) {
-    res.set('Content-Type', 'application/json');
-    res.send('{"message":"Hello from the custom server!"}');
-  });
+io.on('connection', (socket) => {
+    console.log(socket.id);
 
-  // All remaining requests return the React app, so it can handle routing.
-  app.get('*', function(request, response) {
-    response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
-  });
-
-  server = app.listen(PORT, function () {
-    console.error(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
-  });
-
-  io = socket(server);
-
-  io.on('connection', (socket) => {
-      console.log(socket.id);
-    
-      socket.on('SEND_MESSAGE', function(data){
-          //using io.emit instead of io.socket.emit
-          io.emit('RECEIVE_MESSAGE', data);
-      })
-  });
-}
+    socket.on('SEND_MESSAGE', function(data){
+        io.sockets.emit('RECEIVE_MESSAGE', data);
+    })
+});
