@@ -112,7 +112,7 @@ class Chat extends React.Component{
                     <div className="col">
                         <div className="card">
                             <div className="card-body">
-                                <div className="card-title">Words List, Gameword: {this.state.game_word}</div>
+                                <div className="card-title">Words Guesses</div>
                                 <hr />
                                 <span id="wait_message" style={{'display': 'none'}}>{this.state.wait_message}</span>
                                 <div className="words">
