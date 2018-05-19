@@ -105,13 +105,13 @@ class Chat extends React.Component{
         this.socket.on('RECEIVE_USERNAME', function(data){
             that.setState({
                 wait_message: data.toString() + " is selecting a word."
-            })
+            });
             
         });
 
         this.socket.on('RECEIVE_SCORES', function(data){
             var scores_list = that.state.scores_list;
-            var bool;
+            var bool = false;
             for (var i = 0; i < scores_list.length; i++) {
                 if (scores_list[i].author == data.author) {
                     scores_list[i].score = data.score;
@@ -124,7 +124,7 @@ class Chat extends React.Component{
             } else {
                 that.setState({scores_list: [...that.state.scores_list, data]});
             }
-        })
+        });
 
         timer.onDone(function(){
             console.log('Timer is complete');
