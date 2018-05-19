@@ -26,9 +26,11 @@ const io = socket(server);
 let players = [];
 let current_turn = 0;
 let _turn = 0;
+let player_scores = [];
 
 function next_turn(){
-    _turn = current_turn++ % players.length;
+    _turn = ++current_turn % players.length;
+    console.log(_turn);
     players[_turn].emit('YOUR_TURN');
 }
 
@@ -47,6 +49,13 @@ io.on('connection', (socket) => {
             next_turn();
          }
     });
+
+    socket.on('SEND_SCORE', function(data){
+        
+        
+        io.sockets.emit('RECEIVE_SCORES', data);
+    });
+
     
     socket.on('PLAYER_NAME_CHOSEN', function(data){
         if (players[_turn] == socket) {
