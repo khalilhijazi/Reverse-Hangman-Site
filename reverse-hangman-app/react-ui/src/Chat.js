@@ -19,6 +19,7 @@ class Chat extends React.Component{
             scores_list: []
         };
         var timer = new Stopwatch(60000);
+        var universal_timer = new Stopwatch(60000);
 
         
         this.socket = io('https://limitless-depths-91672.herokuapp.com', {transports: ['websocket']});
@@ -92,6 +93,7 @@ class Chat extends React.Component{
         this.sendGameWord = ev => {
             ev.preventDefault();
             this.socket.emit('CHANGE_WORD', this.state.game_word);
+            timer.start();
 
         }
 
@@ -99,7 +101,7 @@ class Chat extends React.Component{
             that.setState({game_word: data.toString()});
             document.getElementById("wordInputContainer").style.display="none";
             document.getElementById("wait_message").style.display="none";
-            timer.start();
+            universal_timer.start();
         });
 
         this.socket.on('RECEIVE_USERNAME', function(data){
@@ -113,7 +115,7 @@ class Chat extends React.Component{
             var scores_list = that.state.scores_list;
             var bool = false;
             for (var i = 0; i < scores_list.length; i++) {
-                if (scores_list[i].author == data.author) {
+                if (scores_list[i].author === data.author) {
                     scores_list[i].score = data.score;
                     bool = true;
                 }
@@ -128,6 +130,12 @@ class Chat extends React.Component{
 
         timer.onDone(function(){
             console.log('Timer is complete');
+            
+            timer.reset(60000);
+            that.socket.emit('NEXT_PLAYER', this.state.game_word);
+        });
+
+        universal_timer.onDone(function(){
             that.setState({
                 messages: [],
                 game_word: ''
@@ -136,9 +144,7 @@ class Chat extends React.Component{
                 author: that.state.username,
                 score: that.state.player_score
             });
-            
-            timer.reset(60000);
-            that.socket.emit('NEXT_PLAYER', this.state.game_word);
+            universal_timer.reset(60000);
         });
        
     }
