@@ -16,7 +16,9 @@ class Chat extends React.Component{
             letters_in_position: '',
             player_score: 0,
             player_words: [],
-            scores_list: []
+            scores_list: [],
+            round_num: 1,
+            round_title: '',
         };
         var timer = new Stopwatch(60000);
         var universal_timer = new Stopwatch(60000);
@@ -67,6 +69,11 @@ class Chat extends React.Component{
                 player_score: score
             });
 
+            this.socket.emit('SEND_SCORE', {
+                author: this.state.username,
+                score: score,
+            });
+
             this.socket.emit('SEND_MESSAGE', {
                 author: this.state.username,
                 message: this.state.message,
@@ -88,6 +95,9 @@ class Chat extends React.Component{
             document.getElementById("entry_div").style.display="none";
             document.getElementById("second_div").style.display="flex";
             document.getElementById("wait_message").style.display="block";
+            this.setState({
+                round_title: "Round: " + this.state.round_num
+            })
         }
 
         this.sendGameWord = ev => {
@@ -98,9 +108,14 @@ class Chat extends React.Component{
         }
 
         this.socket.on('RECEIVE_WORD', function(data){
-            that.setState({game_word: data.toString()});
+            //var round = that.state.round_num + 1;
+            
+            that.setState({
+                game_word: data.toString(),
+            });
             document.getElementById("wordInputContainer").style.display="none";
             document.getElementById("wait_message").style.display="none";
+
             universal_timer.start();
         });
 
@@ -132,18 +147,26 @@ class Chat extends React.Component{
             console.log('Timer is complete');
             
             timer.reset(60000);
-            that.socket.emit('NEXT_PLAYER', this.state.game_word);
+            that.socket.emit('NEXT_PLAYER', this.state.round_num);
+            
         });
 
         universal_timer.onDone(function(){
+
             that.setState({
                 messages: [],
-                game_word: ''
+                game_word: '',
             });
+
             that.socket.emit('SEND_SCORE', {
                 author: that.state.username,
                 score: that.state.player_score
             });
+            that.setState({
+                round_num: that.state.round_num + 1,
+                round_title: "Round " + that.state.round_num
+            });
+
             universal_timer.reset(60000);
         });
        
@@ -163,6 +186,10 @@ class Chat extends React.Component{
                             <button onClick={this.setUsername} className="btn btn-primary form-control">Send</button>
                         </div>
                     </div>
+                </div>
+                
+                <div className="row">
+                    <h1 style={{textAlign: 'center'}}>{this.state.round_title}</h1>
                 </div>
                 
                 <div className="row" id="second_div" style={{display: 'none'}}>
