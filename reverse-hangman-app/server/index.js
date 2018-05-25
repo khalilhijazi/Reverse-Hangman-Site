@@ -24,12 +24,12 @@ console.error(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
 
 const io = socket(server);
 let players = [];
-let current_turn = 1;
+let current_turn = 0;
 let _turn = 0;
 let player_scores = [];
 
 function next_turn(){
-    _turn = current_turn++ % players.length;
+    _turn = ++current_turn % players.length;
     console.log(_turn);
     players[_turn].emit('YOUR_TURN');
 }
@@ -75,6 +75,7 @@ io.on('connection', (socket) => {
     socket.on('disconnect', function(){
         console.log('A player disconnected');
         players.splice(players.indexOf(socket),1);
+        _turn--;
         console.log("Number of players now ",players.length);
     });
     
