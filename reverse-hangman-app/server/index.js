@@ -75,7 +75,6 @@ io.on('connection', (socket) => {
     socket.on('disconnect', function(){
         console.log('A player disconnected');
         players.splice(players.indexOf(socket),1);
-        _turn--;
         console.log("Number of players now ",players.length);
     });
     
