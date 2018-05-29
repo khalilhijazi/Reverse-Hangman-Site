@@ -32,6 +32,7 @@ function next_turn(){
     _turn = ++current_turn % players.length;
     console.log(_turn);
     players[_turn].emit('YOUR_TURN');
+    console.log("player at index: " + _turn);
 }
 
 
@@ -41,11 +42,12 @@ io.on('connection', (socket) => {
 
     if (players.length == 1) {
         players[0].emit('YOUR_TURN');
+        console.log("I just got fired and turn is: " + _turn);
     }
     
     socket.on('NEXT_PLAYER', function(data){
         if(players[_turn] == socket){
-            //resetTimeOut();
+            
             next_turn();
          }
     });
@@ -75,7 +77,11 @@ io.on('connection', (socket) => {
     socket.on('disconnect', function(){
         console.log('A player disconnected');
         players.splice(players.indexOf(socket),1);
-        _turn--;
+        //_turn--;
+        if (players.length == 0) {
+            _turn = 0;
+            current_turn = 0;
+        }
         console.log("Number of players now ",players.length);
     });
     
