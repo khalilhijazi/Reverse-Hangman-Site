@@ -133,6 +133,8 @@ class Chat extends React.Component{
                 if (scores_list[i].author === data.author) {
                     scores_list[i].score = data.score;
                     bool = true;
+                } else {
+                    scores_list.splice(i, 1);
                 }
             }
 
