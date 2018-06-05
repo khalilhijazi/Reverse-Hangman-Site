@@ -17,7 +17,6 @@ class Chat extends React.Component{
             player_score: 0,
             player_words: [],
             scores_list: [],
-            round_num: 1,
             round_title: '',
         };
         var timer = new Stopwatch(60000);
@@ -95,9 +94,6 @@ class Chat extends React.Component{
             document.getElementById("entry_div").style.display="none";
             document.getElementById("second_div").style.display="flex";
             document.getElementById("wait_message").style.display="block";
-            this.setState({
-                round_title: "Round: " + this.state.round_num
-            })
         }
 
         this.sendGameWord = ev => {
@@ -107,8 +103,12 @@ class Chat extends React.Component{
 
         }
 
+        this.socket.on('RECEIVE_ROUND', function(data){
+            that.setState({round_title: data});
+        });
+
         this.socket.on('RECEIVE_WORD', function(data){
-            //var round = that.state.round_num + 1;
+            
             
             that.setState({
                 game_word: data.toString(),
@@ -137,7 +137,7 @@ class Chat extends React.Component{
             console.log('Timer is complete');
             
             timer.reset(60000);
-            that.socket.emit('NEXT_PLAYER', this.state.round_num);
+            that.socket.emit('NEXT_PLAYER');
             
         });
 
@@ -151,10 +151,6 @@ class Chat extends React.Component{
             that.socket.emit('SEND_SCORE', {
                 author: that.state.username,
                 score: that.state.player_score
-            });
-            that.setState({
-                round_num: that.state.round_num + 1,
-                round_title: "Round " + that.state.round_num
             });
 
             universal_timer.reset(60000);
@@ -178,7 +174,7 @@ class Chat extends React.Component{
                     </div>
                 </div>
                 
-                <div className="row">
+                <div className="row" id="round_header">
                     <h1 style={{textAlign: 'center'}}>{this.state.round_title}</h1>
                 </div>
                 

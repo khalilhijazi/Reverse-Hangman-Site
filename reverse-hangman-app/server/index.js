@@ -27,6 +27,7 @@ let players = [];
 let current_turn = 0;
 let _turn = 0;
 let player_scores = [];
+let round = 1;
 
 function next_turn(){
     _turn = ++current_turn % players.length;
@@ -52,9 +53,11 @@ io.on('connection', (socket) => {
         console.log("I just got fired and turn is: " + _turn);
     }
     
-    socket.on('NEXT_PLAYER', function(data){
+    socket.on('NEXT_PLAYER', function(){
         if(players[_turn] == socket){
             next_turn();
+            round += 1;
+            io.sockets.emit('RECEIVE_ROUND', "Round " + round);
          }
     });
 
@@ -70,12 +73,14 @@ io.on('connection', (socket) => {
     socket.on('PLAYER_NAME_CHOSEN', function(data){
         if (players[_turn] == socket) {
             socket.broadcast.emit('RECEIVE_USERNAME', data);
+            
         }
         player_scores[players.indexOf(socket)].name = data;
     });
     
     socket.on('CHANGE_WORD', function(data){
         io.sockets.emit('RECEIVE_WORD', data);
+        io.sockets.emit('RECEIVE_ROUND', "Round " + round);
     });
     
     socket.on('SEND_MESSAGE', function(data){
