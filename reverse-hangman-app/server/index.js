@@ -31,6 +31,7 @@ let player_scores = [];
 function next_turn(){
     _turn = ++current_turn % players.length;
     console.log(_turn);
+    players[_turn].broadcast.emit('RECEIVE_USERNAME', player_scores[_turn].name);
     players[_turn].emit('YOUR_TURN');
     console.log("player at index: " + _turn);
 }
@@ -39,6 +40,12 @@ function next_turn(){
 io.on('connection', (socket) => {
     console.log(socket.id + " is now connected");
     players.push(socket);
+    player_scores.push({
+        socket: socket,
+        score: 0,
+        name: ''
+    });
+    console.log(player_scores);
 
     if (players.length == 1) {
         players[0].emit('YOUR_TURN');
@@ -47,16 +54,16 @@ io.on('connection', (socket) => {
     
     socket.on('NEXT_PLAYER', function(data){
         if(players[_turn] == socket){
-            
             next_turn();
          }
     });
 
 
     socket.on('SEND_SCORE', function(data){
-        
-        
-        io.sockets.emit('RECEIVE_SCORES', data);
+        player_scores[players.indexOf(socket)].score = data.score;
+        var scores_sent = player_scores.map(a => (a.name + ": " + a.score));
+        io.sockets.emit('RECEIVE_SCORES', scores_sent);
+        console.log(scores_sent);
     });
 
     
@@ -64,6 +71,7 @@ io.on('connection', (socket) => {
         if (players[_turn] == socket) {
             socket.broadcast.emit('RECEIVE_USERNAME', data);
         }
+        player_scores[players.indexOf(socket)].name = data;
     });
     
     socket.on('CHANGE_WORD', function(data){
@@ -76,8 +84,12 @@ io.on('connection', (socket) => {
     
     socket.on('disconnect', function(){
         console.log('A player disconnected');
-        players.splice(players.indexOf(socket),1);
-        //_turn--;
+        var index = players.indexOf(socket);
+        players.splice(index,1);
+        player_scores.splice(index, 1);
+        var scores_sent = player_scores.map(a => (a.name + ": " + a.score));
+        io.sockets.emit('RECEIVE_SCORES', scores_sent);
+
         if (players.length == 0) {
             _turn = 0;
             current_turn = 0;
