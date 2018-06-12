@@ -54,7 +54,7 @@ io.on('connection', (socket) => {
     io.sockets.emit('RECEIVE_ROUND', "Round " + round);
     io.sockets.emit('RECEIVE_ROUND', game_word);
     io.sockets.emit('RECEIVE_SCORES', scores_copy);
-    io.sockets.emit('RECEIVE_MESSAGES', messages);
+    //io.sockets.emit('RECEIVE_MESSAGES', messages);
 
 
     if (players.length == 1) {
@@ -120,6 +120,14 @@ io.on('connection', (socket) => {
         player_scores.splice(index, 1);
         var scores_sent = player_scores.map(a => (a.name + ": " + a.score));
         io.sockets.emit('RECEIVE_SCORES', scores_sent);
+
+        if (players[_turn] === socket) {
+            next_turn();
+            round += 1;
+            winning_clients = [];
+            messages = [];
+            io.sockets.emit('RECEIVE_ROUND', "Round " + round);
+        }
 
         if (players.length == 0) {
             _turn = 0;
