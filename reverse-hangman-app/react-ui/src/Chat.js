@@ -25,7 +25,7 @@ class Chat extends React.Component{
         var universal_timer = new Stopwatch(60000);
 
         
-        this.socket = io('https://limitless-depths-91672.herokuapp.com/', {transports: ['websocket']});
+        this.socket = io('https://limitless-depths-91672.herokuapp.com', {transports: ['websocket']});
 
         this.socket.on('RECEIVE_MESSAGES', function(data){
             setMessages(data);
@@ -35,21 +35,10 @@ class Chat extends React.Component{
             this.setState({messages: data});
         };
 
-       /*  this.socket.on('RECEIVE_MESSAGE', function(data){
-            addMessage(data);
-        }); */
-
         var that = this;
         this.socket.on('YOUR_TURN', function(){
             document.getElementById("wordInputContainer").style.display="block";
         });
-
-        /* const addMessage = data => {
-            console.log(data);
-            
-            this.setState({messages: [...this.state.messages, data]});
-            console.log(this.state.messages);
-        }; */
 
         this.sendMessage = ev => {
             ev.preventDefault();
@@ -156,7 +145,6 @@ class Chat extends React.Component{
         });
 
         timer.onDone(function(){
-            console.log('Timer is complete');
             
             timer.reset(60000);
             that.socket.emit('NEXT_PLAYER');
@@ -168,6 +156,7 @@ class Chat extends React.Component{
             that.setState({
                 messages: [],
                 game_word: '',
+                guessed_word: false
             });
 
             that.socket.emit('SEND_SCORE', {

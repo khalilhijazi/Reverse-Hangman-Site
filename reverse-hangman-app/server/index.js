@@ -34,7 +34,6 @@ let winning_clients = [];
 
 function next_turn(){
     _turn = ++current_turn % players.length;
-    console.log(_turn);
     players[_turn].broadcast.emit('RECEIVE_USERNAME', player_scores[_turn].name);
     players[_turn].emit('YOUR_TURN');
     console.log("player at index: " + _turn);
@@ -49,11 +48,17 @@ io.on('connection', (socket) => {
         score: 0,
         name: ''
     });
-    //console.log(player_scores);
+
+    var scores_copy = player_scores.map(a => (a.name + ": " + a.score));
+
+    io.sockets.emit('RECEIVE_ROUND', "Round " + round);
+    io.sockets.emit('RECEIVE_ROUND', game_word);
+    io.sockets.emit('RECEIVE_SCORES', scores_copy);
+    io.sockets.emit('RECEIVE_MESSAGES', messages);
+
 
     if (players.length == 1) {
         players[0].emit('YOUR_TURN');
-        console.log("I just got fired and turn is: " + _turn);
     }
     
     socket.on('NEXT_PLAYER', function(){
@@ -71,7 +76,6 @@ io.on('connection', (socket) => {
         player_scores[players.indexOf(socket)].score = data.score;
         var scores_sent = player_scores.map(a => (a.name + ": " + a.score));
         io.sockets.emit('RECEIVE_SCORES', scores_sent);
-        console.log(scores_sent);
     });
 
     
@@ -95,7 +99,7 @@ io.on('connection', (socket) => {
             winning_clients.push(data.author);
             data.return_message = data.author + " guessed the word";
             data.checker = 1;
-            //socket.emit('UPDATE_CHECKER');
+
         } else {
             if (winning_clients.indexOf(data.author) !== -1) {
                 data.checker = 1;
@@ -105,7 +109,7 @@ io.on('connection', (socket) => {
         }
 
         messages.push(data);
-        //io.sockets.emit('RECEIVE_MESSAGE', data);
+
         io.sockets.emit('RECEIVE_MESSAGES', messages);
     });
     
@@ -122,6 +126,8 @@ io.on('connection', (socket) => {
             current_turn = 0;
             round = 1;
             messages = [];
+            winning_clients = [];
+            game_word = '';
         }
 
         console.log("Number of players now ",players.length);
