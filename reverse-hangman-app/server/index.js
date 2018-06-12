@@ -28,6 +28,9 @@ let current_turn = 0;
 let _turn = 0;
 let player_scores = [];
 let round = 1;
+let messages = [];
+let game_word = '';
+let winning_clients = [];
 
 function next_turn(){
     _turn = ++current_turn % players.length;
@@ -46,7 +49,7 @@ io.on('connection', (socket) => {
         score: 0,
         name: ''
     });
-    console.log(player_scores);
+    //console.log(player_scores);
 
     if (players.length == 1) {
         players[0].emit('YOUR_TURN');
@@ -57,6 +60,8 @@ io.on('connection', (socket) => {
         if(players[_turn] == socket){
             next_turn();
             round += 1;
+            winning_clients = [];
+            messages = [];
             io.sockets.emit('RECEIVE_ROUND', "Round " + round);
          }
     });
@@ -79,12 +84,29 @@ io.on('connection', (socket) => {
     });
     
     socket.on('CHANGE_WORD', function(data){
+        game_word = data;
         io.sockets.emit('RECEIVE_WORD', data);
         io.sockets.emit('RECEIVE_ROUND', "Round " + round);
     });
     
     socket.on('SEND_MESSAGE', function(data){
-        io.sockets.emit('RECEIVE_MESSAGE', data);
+
+        if (data.guessed_word && winning_clients.indexOf(data.author) === -1) {
+            winning_clients.push(data.author);
+            data.return_message = data.author + " guessed the word";
+            data.checker = 1;
+            //socket.emit('UPDATE_CHECKER');
+        } else {
+            if (winning_clients.indexOf(data.author) !== -1) {
+                data.checker = 1;
+            }
+
+            data.return_message = data.author + ": " + data.message;
+        }
+
+        messages.push(data);
+        //io.sockets.emit('RECEIVE_MESSAGE', data);
+        io.sockets.emit('RECEIVE_MESSAGES', messages);
     });
     
     socket.on('disconnect', function(){
@@ -98,7 +120,10 @@ io.on('connection', (socket) => {
         if (players.length == 0) {
             _turn = 0;
             current_turn = 0;
+            round = 1;
+            messages = [];
         }
+
         console.log("Number of players now ",players.length);
     });
     

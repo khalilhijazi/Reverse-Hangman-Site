@@ -18,28 +18,38 @@ class Chat extends React.Component{
             player_words: [],
             scores_list: [],
             round_title: '',
+            guessed_word: false,
+            counter: -1,
         };
         var timer = new Stopwatch(60000);
         var universal_timer = new Stopwatch(60000);
 
         
-        this.socket = io('https://limitless-depths-91672.herokuapp.com', {transports: ['websocket']});
+        this.socket = io('https://limitless-depths-91672.herokuapp.com/', {transports: ['websocket']});
 
-        this.socket.on('RECEIVE_MESSAGE', function(data){
-            addMessage(data);
+        this.socket.on('RECEIVE_MESSAGES', function(data){
+            setMessages(data);
         });
+
+        const setMessages = data => {
+            this.setState({messages: data});
+        };
+
+       /*  this.socket.on('RECEIVE_MESSAGE', function(data){
+            addMessage(data);
+        }); */
 
         var that = this;
         this.socket.on('YOUR_TURN', function(){
             document.getElementById("wordInputContainer").style.display="block";
         });
 
-        const addMessage = data => {
+        /* const addMessage = data => {
             console.log(data);
             
             this.setState({messages: [...this.state.messages, data]});
             console.log(this.state.messages);
-        };
+        }; */
 
         this.sendMessage = ev => {
             ev.preventDefault();
@@ -56,33 +66,45 @@ class Chat extends React.Component{
             var guesses = this.state.player_words;
             var score = this.state.player_score;
             guesses.push(this.state.message);
+            var bool = this.state.guessed_word;
 
             if (letters_correct === 5 && letters_in_position === 5) {
-                score += 150;
+                if (!bool) {
+                    score += 150;
+                    bool = true;
+                }
             }
 
             this.setState({
                 letters_correct: letters_correct.toString(),
                 letters_in_position: letters_in_position.toString(),
                 player_words: guesses,
-                player_score: score
+                player_score: score,
+                guessed_word: bool
             });
 
             this.socket.emit('SEND_SCORE', {
                 author: this.state.username,
                 score: score,
             });
+            
 
             this.socket.emit('SEND_MESSAGE', {
                 author: this.state.username,
                 message: this.state.message,
                 letters_correct: letters_correct.toString(),
-                letters_in_position: letters_in_position.toString()
+                letters_in_position: letters_in_position.toString(),
+                guessed_word: bool,
+                return_message: '',
+                checker: 0,
             });
+
+            
 
             this.setState({message: ''});
 
         }
+
         this.setUsername = ev => {
             ev.preventDefault();
             
@@ -104,7 +126,7 @@ class Chat extends React.Component{
         }
 
         this.socket.on('RECEIVE_ROUND', function(data){
-            that.setState({round_title: data});
+            that.setState({round_title: data, guessed_word: false});
         });
 
         this.socket.on('RECEIVE_WORD', function(data){
@@ -202,9 +224,11 @@ class Chat extends React.Component{
                                 <span id="wait_message" style={{'display': 'none'}}>{this.state.wait_message}</span>
                                 <div className="words">
                                     {this.state.messages.map(message => {
-                                        return (
-                                            <div>{message.message}: {message.letters_correct} / {message.letters_in_position}</div>
-                                        )
+                                        if (message.checker !== 1) {
+                                            return (
+                                                <div>{message.message}: {message.letters_correct} / {message.letters_in_position}</div>
+                                            );
+                                        }
                                     })}
                                 </div>
                             </div>
@@ -217,9 +241,15 @@ class Chat extends React.Component{
                                 <hr/>
                                 <div className="messages">
                                     {this.state.messages.map(message => {
-                                        return (
-                                            <div>{message.author}: {message.message}</div>
-                                        )
+                                        if (message.checker === 1) {
+                                            return (
+                                                <div style={{'color': 'green'}}>{message.return_message}</div>
+                                            );
+                                        } else {
+                                            return (
+                                                <div id="return_message">{message.return_message}</div>
+                                            );
+                                        }
                                     })}
                                 </div>
 
